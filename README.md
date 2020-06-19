@@ -1,2 +1,2 @@
 # MTGODecklistParser
-Library to load data from the MTGO website in C#
+C# library to load data from the MTGO website. Check integration tests for usage.

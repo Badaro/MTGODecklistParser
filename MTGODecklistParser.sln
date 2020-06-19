@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTGODecklistParser", "MTGODecklistParser\MTGODecklistParser.csproj", "{4BE7C156-E316-436D-830E-F0CF4981C54E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTGODecklistParser.Tests", "MTGODecklistParser.Tests\MTGODecklistParser.Tests.csproj", "{886E1CBE-0101-4DFD-8AA6-F64700F14BBC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4BE7C156-E316-436D-830E-F0CF4981C54E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BE7C156-E316-436D-830E-F0CF4981C54E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BE7C156-E316-436D-830E-F0CF4981C54E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BE7C156-E316-436D-830E-F0CF4981C54E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{886E1CBE-0101-4DFD-8AA6-F64700F14BBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{886E1CBE-0101-4DFD-8AA6-F64700F14BBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{886E1CBE-0101-4DFD-8AA6-F64700F14BBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{886E1CBE-0101-4DFD-8AA6-F64700F14BBC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8861D9B3-7F4A-4B1C-A258-4D1B4C6D5E57}
+	EndGlobalSection
+EndGlobal
