@@ -55,6 +55,8 @@ namespace MTGODecklistParser.Tests.Integration
             Deck testDeck = _testData.First();
             testDeck.Should().BeEquivalentTo(new Deck()
             {
+                Player = "Wartico1",
+                AnchorUri = new Uri("https://magic.wizards.com/en/articles/archive/mtgo-standings/modern-preliminary-2020-06-02#wartico_-"),
                 Mainboard = new DeckItem[]
                 {
                     new DeckItem(){ CardName="Abbot of Keral Keep",  Count=4 },
@@ -93,7 +95,7 @@ namespace MTGODecklistParser.Tests.Integration
                     new DeckItem(){ CardName="Nihil Spellbomb",         Count=2 },
                     new DeckItem(){ CardName="Wear // Tear",            Count=2 }
                 },
-            });
+            }); ;
         }
     }
 }

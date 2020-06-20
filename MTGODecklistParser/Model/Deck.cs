@@ -7,6 +7,8 @@ namespace MTGODecklistParser.Model
 {
     public class Deck
     {
+        public string Player { get; set; }
+        public Uri AnchorUri { get; set; }
         public DeckItem[] Mainboard { get; set; }
         public DeckItem[] Sideboard { get; set; }
 
