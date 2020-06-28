@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.WebSockets;
 using System.Text;
 
 namespace MTGODecklistParser.Data
@@ -12,7 +13,8 @@ namespace MTGODecklistParser.Data
     {
         public static Deck[] GetDecks(Uri eventUri)
         {
-            string pageContent = new WebClient().DownloadString(eventUri);
+            var randomizedEventUrl = new Uri($"{eventUri.ToString()}?rand={Guid.NewGuid().ToString()}"); // Fixes occasional caching issues
+            string pageContent = new WebClient().DownloadString(randomizedEventUrl);
 
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(pageContent);
