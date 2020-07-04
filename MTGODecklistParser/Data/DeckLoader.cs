@@ -13,7 +13,7 @@ namespace MTGODecklistParser.Data
     {
         public static Deck[] GetDecks(Uri eventUri)
         {
-            var randomizedEventUrl = new Uri($"{eventUri.ToString()}?rand={Guid.NewGuid().ToString()}"); // Fixes occasional caching issues
+            string randomizedEventUrl = $"{eventUri}?rand={Guid.NewGuid()}"; // Fixes occasional caching issues
             string pageContent = new WebClient().DownloadString(randomizedEventUrl);
 
             HtmlDocument doc = new HtmlDocument();

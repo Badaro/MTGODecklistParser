@@ -27,7 +27,8 @@ namespace MTGODecklistParser.Data
                 var toDate = fromDate.AddDays(1);
 
                 string tournamentListUrl = _listUrl.Replace("{fromDate}", FormatDateForUrl(fromDate)).Replace("{toDate}", FormatDateForUrl(toDate));
-                string jsonData = new WebClient().DownloadString(tournamentListUrl);
+                string randomizedTournamentListUrl = $"{tournamentListUrl}&rand={Guid.NewGuid()}"; // Fixes occasional caching issues
+                string jsonData = new WebClient().DownloadString(randomizedTournamentListUrl);
                 string pageContent = String.Join(String.Empty, JsonConvert.DeserializeObject<WizardsAjaxResult>(jsonData).data);
 
                 if(pageContent.Length>0)
