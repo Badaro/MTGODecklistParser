@@ -2,6 +2,7 @@
 using MTGODecklistParser.Model;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.WebSockets;
@@ -13,7 +14,12 @@ namespace MTGODecklistParser.Data
     {
         public static Deck[] GetDecks(Uri eventUri)
         {
-            string randomizedEventUrl = $"{eventUri}?rand={Guid.NewGuid()}"; // Fixes occasional caching issues
+            DateTime eventDate = ExtractDateFromUrl(eventUri);
+
+            string randomizedEventUrl = ((DateTime.UtcNow - eventDate).TotalDays < 1) ?
+                $"{eventUri}?rand={Guid.NewGuid()}" :
+                eventUri.ToString(); // Fixes occasional caching issues on recent events
+
             string pageContent = new WebClient().DownloadString(randomizedEventUrl);
 
             HtmlDocument doc = new HtmlDocument();
@@ -58,6 +64,15 @@ namespace MTGODecklistParser.Data
                 });
             }
             return (cards.ToArray());
+        }
+
+        private static DateTime ExtractDateFromUrl(Uri eventUri)
+        {
+            string eventPath = eventUri.LocalPath;
+            string[] eventPathSegments = eventPath.Split("-");
+            string eventDate = String.Join("-", eventPathSegments.Skip(eventPathSegments.Length - 3).ToArray());
+
+            return DateTime.Parse(eventDate, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal).ToUniversalTime();
         }
     }
 }
