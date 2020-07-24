@@ -61,7 +61,7 @@ namespace MTGODecklistParser.Data
                 result.Add(new Tournament()
                 {
                     Name = tournamentName,
-                    Date = DateTime.Parse(tournamentDate, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal),
+                    Date = DateTime.Parse(tournamentDate, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal).ToUniversalTime(),
                     Uri = new Uri(_rootUrl + tournamentUrl)
                 });
             }
