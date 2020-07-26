@@ -57,6 +57,9 @@ namespace MTGODecklistParser.Data
                 var cardCount = cardNode.SelectSingleNode("span[@class='card-count']").InnerText;
                 var cardName = cardNode.SelectSingleNode("span[@class='card-name']").InnerText;
 
+                // Wizard's website is very inconsistent about this card
+                if (cardName == "Lurrus of the Dream Den") cardName = "Lurrus of the Dream-Den";
+
                 cards.Add(new DeckItem()
                 {
                     Count = Int32.Parse(cardCount),
