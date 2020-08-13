@@ -12,7 +12,7 @@ namespace MTGODecklistParser.Data
 {
     public static class TournamentLoader
     {
-        static string _listUrl = "https://magic.wizards.com/en/section-articles-see-more-ajax?l=en&f=9041&search-result-theme=&limit=20&fromDate={fromDate}&toDate={toDate}&sort=DESC&word=&offset=0";
+        static string _listUrl = "https://magic.wizards.com/en/section-articles-see-more-ajax?l=en&f=9041&search-result-theme=&limit=20&fromDate={fromDate}&toDate={toDate}&sort=DESC&word=&offset={offset}";
         static string _rootUrl = "https://magic.wizards.com";
 
         public static Tournament[] GetTournaments(DateTime startDate, DateTime? endDate = null)
@@ -25,22 +25,30 @@ namespace MTGODecklistParser.Data
             {
                 var fromDate = date;
                 var toDate = fromDate.AddDays(1);
-
-                string tournamentListUrl = _listUrl.Replace("{fromDate}", FormatDateForUrl(fromDate)).Replace("{toDate}", FormatDateForUrl(toDate));
-
-                string randomizedTournamentListUrl =
-                     ((DateTime.UtcNow - toDate).TotalDays < 1) ?
-                    $"{tournamentListUrl}&rand={Guid.NewGuid()}" : 
-                    tournamentListUrl; // Fixes occasional caching issues on recent events
-
-                string jsonData = new WebClient().DownloadString(randomizedTournamentListUrl);
-                string pageContent = String.Join(String.Empty, JsonConvert.DeserializeObject<WizardsAjaxResult>(jsonData).data);
-
-                if(pageContent.Length>0)
+                bool hasMorePages = false;
+                int offset = 0;
+                do
                 {
-                    Tournament[] parsedEvents = ParseTournaments(pageContent);
-                    foreach (Tournament parsedEvent in parsedEvents) if (!result.ContainsKey(parsedEvent.Uri.ToString())) result.Add(parsedEvent.Uri.ToString(), parsedEvent);
-                }
+                    string tournamentListUrl = _listUrl.Replace("{fromDate}", FormatDateForUrl(fromDate)).Replace("{toDate}", FormatDateForUrl(toDate)).Replace("{offset}", offset.ToString());
+
+                    string randomizedTournamentListUrl =
+                         ((DateTime.UtcNow - toDate).TotalDays < 1) ?
+                        $"{tournamentListUrl}&rand={Guid.NewGuid()}" :
+                        tournamentListUrl; // Fixes occasional caching issues on recent events
+
+                    string jsonData = new WebClient().DownloadString(randomizedTournamentListUrl);
+                    WizardsAjaxResult jsonResult = JsonConvert.DeserializeObject<WizardsAjaxResult>(jsonData);
+                    string pageContent = String.Join(String.Empty, jsonResult.data);
+
+                    if (pageContent.Length > 0)
+                    {
+                        Tournament[] parsedEvents = ParseTournaments(pageContent);
+                        foreach (Tournament parsedEvent in parsedEvents) if (!result.ContainsKey(parsedEvent.Uri.ToString())) result.Add(parsedEvent.Uri.ToString(), parsedEvent);
+
+                        hasMorePages = (jsonResult.displaySeeMore == 1);
+                        offset += parsedEvents.Length;
+                    }
+                } while (hasMorePages);
 
                 date = date.AddDays(1);
             }
