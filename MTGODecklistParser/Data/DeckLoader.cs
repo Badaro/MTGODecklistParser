@@ -80,7 +80,7 @@ namespace MTGODecklistParser.Data
         private static DateTime ExtractDateFromUrl(Uri eventUri)
         {
             string eventPath = eventUri.LocalPath;
-            string[] eventPathSegments = eventPath.Split("-");
+            string[] eventPathSegments = eventPath.Split("-").Where(e => e.Length>1).ToArray();
             string eventDate = String.Join("-", eventPathSegments.Skip(eventPathSegments.Length - 3).ToArray());
 
             return DateTime.Parse(eventDate, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal).ToUniversalTime();
