@@ -93,7 +93,15 @@ namespace MTGODecklistParser.Data
             string[] eventPathSegments = eventPath.Split("-").Where(e => e.Length > 1).ToArray();
             string eventDate = String.Join("-", eventPathSegments.Skip(eventPathSegments.Length - 3).ToArray());
 
-            return DateTime.Parse(eventDate, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal).ToUniversalTime();
+            if(DateTime.TryParse(eventDate, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out DateTime parsedDate))
+            {
+                return parsedDate.ToUniversalTime();
+            }
+            else
+            {
+                // This is only used to decide or not to bypass cache, so it's safe to return a fallback for today forcing the bypass
+                return DateTime.UtcNow.Date;
+            }
         }
     }
 }

@@ -31,5 +31,13 @@ namespace MTGODecklistParser.Tests.Integration
                     d.Sideboard.Should().HaveCount(0);
                 });
         }
+
+        [Test]
+        public void ShouldNotBreakOnOutOfStandardUrls()
+        {
+            // Broken tournament, should return empty dataset
+            DeckLoader.GetDecks(new Uri("https://magic.wizards.com/en/content/pauper-league"))
+                .Should().HaveCount(20);
+        }
     }
 }
