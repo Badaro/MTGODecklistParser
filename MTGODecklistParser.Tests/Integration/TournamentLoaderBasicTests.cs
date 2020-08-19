@@ -7,7 +7,7 @@ using MTGODecklistParser.Data;
 
 namespace MTGODecklistParser.Tests.Integration
 {
-    public class TournamentLoaderTests
+    public class TournamentLoaderBasicTests
     {
         private Tournament[] _testData = null;
 

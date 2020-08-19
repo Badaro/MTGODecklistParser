@@ -31,7 +31,7 @@ namespace MTGODecklistParser.Data
                 int offset = 0;
                 do
                 {
-                    string tournamentListUrl = _listUrl.Replace("{fromDate}", FormatDateForUrl(fromDate)).Replace("{toDate}", FormatDateForUrl(toDate)).Replace("{offset}", offset.ToString()).Replace("{searchTerm}",searchTerm);
+                    string tournamentListUrl = _listUrl.Replace("{fromDate}", FormatDateForUrl(fromDate)).Replace("{toDate}", FormatDateForUrl(toDate)).Replace("{offset}", offset.ToString()).Replace("{searchTerm}", searchTerm);
 
                     string randomizedTournamentListUrl =
                          ((DateTime.UtcNow - toDate).TotalDays < 1) ?
@@ -55,7 +55,7 @@ namespace MTGODecklistParser.Data
                 date = date.AddDays(daysPerStep.Value);
             }
 
-            return result.Select(kvp => kvp.Value).ToArray();
+            return result.Select(kvp => kvp.Value).Where(t => t.Date <= endDate).ToArray();
         }
 
         private static Tournament[] ParseTournaments(string pageContent)

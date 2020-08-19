@@ -26,7 +26,10 @@ namespace MTGODecklistParser.Data
             doc.LoadHtml(pageContent);
 
             List<Deck> result = new List<Deck>();
-            foreach (var deckNode in doc.DocumentNode.SelectNodes("//div[@class='deck-group']"))
+            var deckNodes = doc.DocumentNode.SelectNodes("//div[@class='deck-group']");
+            if (deckNodes == null) return new Deck[0];
+
+            foreach (var deckNode in deckNodes)
             {
                 string anchor = deckNode.GetAttributeValue("id", "");
                 string playerName = deckNode.SelectSingleNode("span[@class='deck-meta']/h4/text()")?.InnerText.Split("(").First().Trim();

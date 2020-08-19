@@ -11,6 +11,13 @@ namespace MTGODecklistParser.Tests.Integration
 {
     public class ErrorHandlingTests
     {
+        [Test]
+        public void ShouldNotBreakOnEmptyPage()
+        {
+            // Broken tournament, should return empty dataset
+            DeckLoader.GetDecks(new Uri("https://magic.wizards.com/en/articles/archive/mtgo-standings/modern-mocs-2019-07-17"))
+                .Should().HaveCount(0);
+        }
 
         [Test]
         public void ShouldNotBreakOnEmptyDecks()
@@ -20,8 +27,8 @@ namespace MTGODecklistParser.Tests.Integration
                 .ToList()
                 .ForEach(d =>
                 {
-                    d.Mainboard.Length.Should().Be(0);
-                    d.Sideboard.Length.Should().Be(0);
+                    d.Mainboard.Should().HaveCount(0);
+                    d.Sideboard.Should().HaveCount(0);
                 });
         }
     }
