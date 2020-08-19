@@ -64,7 +64,10 @@ namespace MTGODecklistParser.Data
             if (node == null) return new DeckItem[0];
 
             List<DeckItem> cards = new List<DeckItem>();
-            foreach (var cardNode in node.SelectNodes(isSideboard ? "span[@class='row']" : "div/span[@class='row']"))
+            var cardNodes = node.SelectNodes(isSideboard ? "span[@class='row']" : "div/span[@class='row']");
+            if (cardNodes == null) return new DeckItem[0];
+
+            foreach (var cardNode in cardNodes)
             {
                 var cardCount = cardNode.SelectSingleNode("span[@class='card-count']").InnerText;
                 var cardName = cardNode.SelectSingleNode("span[@class='card-name']").InnerText;
@@ -84,7 +87,7 @@ namespace MTGODecklistParser.Data
         private static DateTime ExtractDateFromUrl(Uri eventUri)
         {
             string eventPath = eventUri.LocalPath;
-            string[] eventPathSegments = eventPath.Split("-").Where(e => e.Length>1).ToArray();
+            string[] eventPathSegments = eventPath.Split("-").Where(e => e.Length > 1).ToArray();
             string eventDate = String.Join("-", eventPathSegments.Skip(eventPathSegments.Length - 3).ToArray());
 
             return DateTime.Parse(eventDate, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal).ToUniversalTime();
