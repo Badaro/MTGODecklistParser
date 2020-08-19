@@ -12,24 +12,26 @@ namespace MTGODecklistParser.Data
 {
     public static class TournamentLoader
     {
-        static string _listUrl = "https://magic.wizards.com/en/section-articles-see-more-ajax?l=en&f=9041&search-result-theme=&limit=20&fromDate={fromDate}&toDate={toDate}&sort=DESC&word=&offset={offset}";
+        static string _listUrl = "https://magic.wizards.com/en/section-articles-see-more-ajax?l=en&f=9041&search-result-theme=&limit=20&fromDate={fromDate}&toDate={toDate}&sort=DESC&word={searchTerm}&offset={offset}";
         static string _rootUrl = "https://magic.wizards.com";
 
-        public static Tournament[] GetTournaments(DateTime startDate, DateTime? endDate = null)
+        public static Tournament[] GetTournaments(DateTime startDate, DateTime? endDate = null, string searchTerm = null, int? daysPerStep = null)
         {
             if (endDate == null) endDate = DateTime.Now;
+            if (searchTerm == null) searchTerm = String.Empty;
+            if (daysPerStep == null) daysPerStep = 1;
             Dictionary<string, Tournament> result = new Dictionary<string, Tournament>();
 
             var date = startDate;
             while (date < endDate)
             {
                 var fromDate = date;
-                var toDate = fromDate.AddDays(1);
+                var toDate = fromDate.AddDays(daysPerStep.Value);
                 bool hasMorePages = false;
                 int offset = 0;
                 do
                 {
-                    string tournamentListUrl = _listUrl.Replace("{fromDate}", FormatDateForUrl(fromDate)).Replace("{toDate}", FormatDateForUrl(toDate)).Replace("{offset}", offset.ToString());
+                    string tournamentListUrl = _listUrl.Replace("{fromDate}", FormatDateForUrl(fromDate)).Replace("{toDate}", FormatDateForUrl(toDate)).Replace("{offset}", offset.ToString()).Replace("{searchTerm}",searchTerm);
 
                     string randomizedTournamentListUrl =
                          ((DateTime.UtcNow - toDate).TotalDays < 1) ?
@@ -50,7 +52,7 @@ namespace MTGODecklistParser.Data
                     }
                 } while (hasMorePages);
 
-                date = date.AddDays(1);
+                date = date.AddDays(daysPerStep.Value);
             }
 
             return result.Select(kvp => kvp.Value).ToArray();
