@@ -32,6 +32,9 @@ namespace MTGODecklistParser.Data
                 string playerName = deckNode.SelectSingleNode("span[@class='deck-meta']/h4/text()")?.InnerText.Split("(").First().Trim();
                 if (String.IsNullOrEmpty(playerName)) playerName = deckNode.SelectSingleNode("div[@class='title-deckicon']/span[@class='deck-meta']/h4/text()")?.InnerText.Split("(").First().Trim();
 
+                string playerResult = deckNode.SelectSingleNode("span[@class='deck-meta']/h4/text()")?.InnerText.Split("(").Last().TrimEnd(')').Trim();
+                if (String.IsNullOrEmpty(playerResult)) playerResult = deckNode.SelectSingleNode("div[@class='title-deckicon']/span[@class='deck-meta']/h4/text()")?.InnerText.Split("(").Last().TrimEnd(')').Trim();
+
                 string deckDateText = deckNode.SelectSingleNode("span[@class='deck-meta']/h5/text()")?.InnerText.Split(" on ").Last().Trim();
                 if (String.IsNullOrEmpty(deckDateText)) deckDateText = deckNode.SelectSingleNode("div[@class='title-deckicon']/span[@class='deck-meta']/h5/text()")?.InnerText.Split(" on ").Last().Trim();
 
@@ -46,6 +49,7 @@ namespace MTGODecklistParser.Data
                 {
                     Date = deckDate,
                     Player = playerName,
+                    Result = playerResult,
                     AnchorUri = new Uri($"{eventUri.ToString()}#{anchor}"),
                     Mainboard = ParseCards(mainboardNode, false),
                     Sideboard = ParseCards(sideboardNode, true)

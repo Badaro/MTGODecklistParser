@@ -32,6 +32,7 @@ namespace MTGODecklistParser.Tests.Integration
             {
                 Date = new DateTime(2020, 06, 01, 00, 00, 00, DateTimeKind.Utc),
                 Player = "Wartico1",
+                Result = "5-0",
                 AnchorUri = new Uri("https://magic.wizards.com/en/articles/archive/mtgo-standings/modern-preliminary-2020-06-02#wartico_-"),
                 Mainboard = new DeckItem[]
                 {

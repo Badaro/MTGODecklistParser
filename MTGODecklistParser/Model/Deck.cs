@@ -9,6 +9,7 @@ namespace MTGODecklistParser.Model
     {
         public DateTime Date { get; set; }
         public string Player { get; set; }
+        public string Result { get; set; }
         public Uri AnchorUri { get; set; }
         public DeckItem[] Mainboard { get; set; }
         public DeckItem[] Sideboard { get; set; }
