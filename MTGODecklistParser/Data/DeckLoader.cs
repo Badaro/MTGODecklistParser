@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.WebSockets;
 using System.Text;
+using System.Web;
 
 namespace MTGODecklistParser.Data
 {
@@ -73,10 +74,7 @@ namespace MTGODecklistParser.Data
             foreach (var cardNode in cardNodes)
             {
                 var cardCount = cardNode.SelectSingleNode("span[@class='card-count']").InnerText;
-                var cardName = cardNode.SelectSingleNode("span[@class='card-name']").InnerText;
-
-                // Wizard's website is very inconsistent about this card
-                if (cardName == "Lurrus of the Dream Den") cardName = "Lurrus of the Dream-Den";
+                var cardName = FixCardName(HttpUtility.HtmlDecode(cardNode.SelectSingleNode("span[@class='card-name']").InnerText));
 
                 cards.Add(new DeckItem()
                 {
@@ -85,6 +83,22 @@ namespace MTGODecklistParser.Data
                 });
             }
             return (cards.ToArray());
+        }
+
+        // Fix inconsistencies on Wizard's side
+        private static string FixCardName(string cardName)
+        {
+            if (cardName == "Lurrus of the Dream Den") return "Lurrus of the Dream-Den";
+            if (cardName == "Kongming, ??quot?Sleeping Dragon??quot?") return "Kongming, \"Sleeping Dragon\"";
+            if (cardName == "GhazbA?n Ogre") return "Ghazbán Ogre";
+            if (cardName == "Lim-DA?l's Vault") return "Lim-Dûl's Vault";
+            if (cardName == "Lim-DAul's Vault") return "Lim-Dûl's Vault";
+            if (cardName == "SAcance") return "Séance";
+            if (cardName == "Æther Vial") return "Aether Vial";
+            if (cardName == "Ghirapur Æther Grid") return "Ghirapur Aether Grid";
+            if (cardName == "Unravel the Æther") return "Unravel the Aether";
+            if (cardName == "Trinisphère") return "Trinisphere";
+            return cardName;
         }
 
         private static DateTime ExtractDateFromUrl(Uri eventUri)
