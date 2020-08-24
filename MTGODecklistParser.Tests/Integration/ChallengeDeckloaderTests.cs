@@ -21,6 +21,12 @@ namespace MTGODecklistParser.Tests.Integration
             return new DateTime(2020, 06, 07, 00, 00, 00, DateTimeKind.Utc);
         }
 
+        protected override DateTime? GetDeckDate()
+        {
+            return new DateTime(2020, 06, 07, 00, 00, 00, DateTimeKind.Utc);
+        }
+
+
         protected override Uri GetEventUri()
         {
             return new Uri("https://magic.wizards.com/en/articles/archive/mtgo-standings/modern-challenge-2020-06-08");

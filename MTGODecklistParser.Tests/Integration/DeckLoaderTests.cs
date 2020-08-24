@@ -28,7 +28,7 @@ namespace MTGODecklistParser.Tests.Integration
         [Test]
         public void DecksHaveDate()
         {
-            foreach (var deck in _testData) deck.Date.Should().Be(this.GetEventDate());
+            foreach (var deck in _testData) deck.Date.Should().Be(this.GetDeckDate());
         }
 
         [Test]
@@ -70,6 +70,7 @@ namespace MTGODecklistParser.Tests.Integration
 
         protected abstract Uri GetEventUri();
         protected abstract DateTime GetEventDate();
+        protected abstract DateTime? GetDeckDate();
         protected abstract int GetDeckCount();
         protected abstract Deck GetFirstDeck();
     }

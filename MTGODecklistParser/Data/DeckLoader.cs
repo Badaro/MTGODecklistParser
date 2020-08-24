@@ -46,7 +46,7 @@ namespace MTGODecklistParser.Data
                 var mainboardNode = decklistNode.SelectSingleNode("div[@class='sorted-by-overview-container sortedContainer']");
                 var sideboardNode = decklistNode.SelectSingleNode("div[@class='sorted-by-sideboard-container  clearfix element']");
 
-                DateTime deckDate = eventDate;
+                DateTime? deckDate = null;
                 if (!String.IsNullOrEmpty(deckDateText)) deckDate = DateTime.ParseExact(deckDateText, "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal).ToUniversalTime();
 
                 result.Add(new Deck()
