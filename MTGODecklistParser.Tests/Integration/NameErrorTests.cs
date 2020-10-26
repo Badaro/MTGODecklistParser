@@ -49,6 +49,13 @@ namespace MTGODecklistParser.Tests.Integration
                 .Mainboard
                 .First(c => c.CardName.StartsWith("Lim-D")).CardName
                 .Should().Be("Lim-Dûl's Vault");
+
+            // Broken on Wizard's site in a third different way
+            DeckLoader.GetDecks(new Uri("https://magic.wizards.com/en/articles/archive/mtgo-standings/legacy-challenge-2020-08-31"))
+                .First(d => d.Player == "twinlesstwin")
+                .Mainboard
+                .First(c => c.CardName.StartsWith("Lim-D")).CardName
+                .Should().Be("Lim-Dûl's Vault");
         }
 
         [Test]
@@ -115,6 +122,17 @@ namespace MTGODecklistParser.Tests.Integration
                 .Sideboard
                 .First(c => c.CardName.StartsWith("Trini")).CardName
                 .Should().Be("Trinisphere");
+        }
+
+        [Test]
+        public void ShouldFixNameForExpansionExplosion()
+        {
+            // Broken on Wizard's site
+            DeckLoader.GetDecks(new Uri("https://magic.wizards.com/en/articles/archive/mtgo-standings/pioneer-challenge-2020-09-20"))
+                .First(d => d.Player == "Capriccioso")
+                .Mainboard
+                .First(c => c.CardName.StartsWith("Expan")).CardName
+                .Should().Be("Expansion // Explosion");
         }
 
         [Test]
