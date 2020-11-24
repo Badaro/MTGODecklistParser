@@ -5,9 +5,9 @@ using System.Text;
 
 namespace MTGODecklistParser.Tests.Integration
 {
-    class LeagueDeckloaderTests : DeckLoaderTests
+    class DeckloaderTestsForLeague : DeckLoaderTests
     {
-        public LeagueDeckloaderTests()
+        public DeckloaderTestsForLeague()
         {
         }
 
