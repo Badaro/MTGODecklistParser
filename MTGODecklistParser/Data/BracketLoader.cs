@@ -11,12 +11,12 @@ using System.Web;
 
 namespace MTGODecklistParser.Data
 {
-    public static class StandingsLoader
+    public static class BracketLoader
     {
-        [Obsolete("Use TournamentDetailsLoader.GetTournamentDetails(eventUri).Standings")]
-        public static Standing[] GetStandings(Uri eventUri)
+        [Obsolete("Use TournamentDetailsLoader.GetTournamentDetails(eventUri).Bracket")]
+        public static Bracket GetBracket(Uri eventUri)
         {
-            return TournamentDetailsLoader.GetTournamentDetails(eventUri).Standings;
+            return TournamentDetailsLoader.GetTournamentDetails(eventUri).Bracket;
         }
     }
 }
