@@ -16,7 +16,7 @@ namespace MTGODecklistParser.Tests.Integration
         [OneTimeSetUp]
         public void GetTestData()
         {
-            _testData = BracketLoader.GetBracket(this.GetEventUri());
+            _testData = TournamentDetailsLoader.GetTournamentDetails(this.GetEventUri()).Bracket;
         }
 
         [Test]

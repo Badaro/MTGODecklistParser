@@ -15,7 +15,7 @@ namespace MTGODecklistParser.Tests.Integration
         public void ShouldNotBreakOnEmptyPage()
         {
             // Broken tournament, should return empty dataset
-            DeckLoader.GetDecks(new Uri("https://magic.wizards.com/en/articles/archive/mtgo-standings/modern-mocs-2019-07-17"))
+            TournamentDetailsLoader.GetTournamentDetails(new Uri("https://magic.wizards.com/en/articles/archive/mtgo-standings/modern-mocs-2019-07-17")).Decks
                 .Should().HaveCount(0);
         }
 
@@ -23,7 +23,7 @@ namespace MTGODecklistParser.Tests.Integration
         public void ShouldNotBreakOnEmptyDecks()
         {
             // Broken tournament, should return empty dataset
-            DeckLoader.GetDecks(new Uri("https://magic.wizards.com/en/articles/archive/mtgo-standings/sealed-war-block-mcq-2019-05-10"))
+            TournamentDetailsLoader.GetTournamentDetails(new Uri("https://magic.wizards.com/en/articles/archive/mtgo-standings/sealed-war-block-mcq-2019-05-10")).Decks
                 .ToList()
                 .ForEach(d =>
                 {
@@ -35,7 +35,7 @@ namespace MTGODecklistParser.Tests.Integration
         [Test]
         public void ShouldNotBreakOnOutOfStandardUrls()
         {
-            DeckLoader.GetDecks(new Uri("https://magic.wizards.com/en/content/pauper-league"))
+            TournamentDetailsLoader.GetTournamentDetails(new Uri("https://magic.wizards.com/en/content/pauper-league")).Decks
                 .Should().HaveCount(20);
         }
     }

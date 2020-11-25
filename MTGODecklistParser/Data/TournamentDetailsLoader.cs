@@ -14,7 +14,7 @@ namespace MTGODecklistParser.Data
 {
     public static class TournamentDetailsLoader
     {
-        internal static TournamentDetails GetTournamentDetails(Uri eventUri)
+        public static TournamentDetails GetTournamentDetails(Uri eventUri)
         {
             DateTime eventDate = ExtractDateFromUrl(eventUri);
 
@@ -114,7 +114,7 @@ namespace MTGODecklistParser.Data
             return cardName;
         }
 
-        public static Standing[] ParseStandings(HtmlDocument doc)
+        private static Standing[] ParseStandings(HtmlDocument doc)
         {
             var standingsRoot = doc.DocumentNode.SelectSingleNode("//table[@class='sticky-enabled']");
             if (standingsRoot == null) return null;
@@ -147,7 +147,7 @@ namespace MTGODecklistParser.Data
             return result.ToArray();
         }
 
-        public static Bracket ParseBracket(HtmlDocument doc)
+        private static Bracket ParseBracket(HtmlDocument doc)
         {
             var bracketRoot = doc.DocumentNode.SelectSingleNode("//div[@class='wrap-bracket-slider']");
             if (bracketRoot == null) return null;
@@ -162,7 +162,7 @@ namespace MTGODecklistParser.Data
             };
         }
 
-        public static BracketItem[] ParseBracketItem(HtmlNode node)
+        private static BracketItem[] ParseBracketItem(HtmlNode node)
         {
             var playerNodes = node.SelectNodes("div/div[@class='player']");
 
