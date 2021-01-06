@@ -13,7 +13,7 @@ namespace MTGODecklistParser.Model
 
         public override string ToString()
         {
-            return $"Final: {Finals.WinningPlayer} {Finals.Result} {Finals.LosingPlayer}";
+            return $"Final: {Finals.Player1} {Finals.Result} {Finals.Player2}";
         }
     }
 }

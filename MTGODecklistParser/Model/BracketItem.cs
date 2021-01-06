@@ -7,13 +7,13 @@ namespace MTGODecklistParser.Model
 {
     public class BracketItem
     {
-        public string WinningPlayer { get; set; }
-        public string LosingPlayer { get; set; }
+        public string Player1 { get; set; }
+        public string Player2 { get; set; }
         public string Result { get; set; }
 
         public override string ToString()
         {
-            return $"{WinningPlayer} {Result} {LosingPlayer}";
+            return $"{Player1} {Result} {Player2}";
         }
     }
 }

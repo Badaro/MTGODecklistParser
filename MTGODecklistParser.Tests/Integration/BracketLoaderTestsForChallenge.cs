@@ -17,17 +17,17 @@ namespace MTGODecklistParser.Tests.Integration
             {
                 Quarterfinals = new BracketItem[]
                 {
-                    new BracketItem(){ WinningPlayer = "TSPJendrek", LosingPlayer = "AstralPlane",  Result= "2-0" },
-                    new BracketItem(){ WinningPlayer = "JB2002",     LosingPlayer = "signblindman", Result= "2-1" },
-                    new BracketItem(){ WinningPlayer = "ZYURYO",     LosingPlayer = "Blitzlion27",  Result= "2-0" },
-                    new BracketItem(){ WinningPlayer = "Yanti",      LosingPlayer = "SvenSvenSven", Result= "2-1" }
+                    new BracketItem(){ Player1 = "TSPJendrek", Player2 = "AstralPlane",  Result= "2-0" },
+                    new BracketItem(){ Player1 = "JB2002",     Player2 = "signblindman", Result= "2-1" },
+                    new BracketItem(){ Player1 = "ZYURYO",     Player2 = "Blitzlion27",  Result= "2-0" },
+                    new BracketItem(){ Player1 = "Yanti",      Player2 = "SvenSvenSven", Result= "2-1" }
                 },
                 Semifinals = new BracketItem[]
                 {
-                    new BracketItem(){ WinningPlayer = "TSPJendrek", LosingPlayer = "JB2002", Result= "2-1" },
-                    new BracketItem(){ WinningPlayer = "ZYURYO",     LosingPlayer = "Yanti",  Result= "2-0" }
+                    new BracketItem(){ Player1 = "TSPJendrek", Player2 = "JB2002", Result= "2-1" },
+                    new BracketItem(){ Player1 = "ZYURYO",     Player2 = "Yanti",  Result= "2-0" }
                 },
-                Finals = new BracketItem() { WinningPlayer = "TSPJendrek", LosingPlayer = "ZYURYO", Result = "2-0" }
+                Finals = new BracketItem() { Player1 = "TSPJendrek", Player2 = "ZYURYO", Result = "2-0" }
             };
         }
 

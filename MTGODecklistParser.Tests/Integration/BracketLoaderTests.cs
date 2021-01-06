@@ -29,17 +29,17 @@ namespace MTGODecklistParser.Tests.Integration
         [Test]
         public void BracketItemsHaveWinningPlayer()
         {
-            if (_testData != null) foreach (var match in _testData.Quarterfinals) match.WinningPlayer.Should().NotBeNullOrEmpty();
-            if (_testData != null) foreach (var match in _testData.Semifinals) match.WinningPlayer.Should().NotBeNullOrEmpty();
-            if (_testData != null) _testData.Finals.WinningPlayer.Should().NotBeNullOrEmpty();
+            if (_testData != null) foreach (var match in _testData.Quarterfinals) match.Player1.Should().NotBeNullOrEmpty();
+            if (_testData != null) foreach (var match in _testData.Semifinals) match.Player1.Should().NotBeNullOrEmpty();
+            if (_testData != null) _testData.Finals.Player1.Should().NotBeNullOrEmpty();
         }
 
         [Test]
         public void BracketItemsHaveLosingPlayer()
         {
-            if (_testData != null) foreach (var match in _testData.Quarterfinals) match.LosingPlayer.Should().NotBeNullOrEmpty();
-            if (_testData != null) foreach (var match in _testData.Semifinals) match.LosingPlayer.Should().NotBeNullOrEmpty();
-            if (_testData != null) _testData.Finals.LosingPlayer.Should().NotBeNullOrEmpty();
+            if (_testData != null) foreach (var match in _testData.Quarterfinals) match.Player2.Should().NotBeNullOrEmpty();
+            if (_testData != null) foreach (var match in _testData.Semifinals) match.Player2.Should().NotBeNullOrEmpty();
+            if (_testData != null) _testData.Finals.Player2.Should().NotBeNullOrEmpty();
         }
 
         [Test]

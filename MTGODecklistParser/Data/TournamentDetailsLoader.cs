@@ -180,9 +180,9 @@ namespace MTGODecklistParser.Data
             {
                 result.Add(new BracketItem()
                 {
-                    WinningPlayer = players[i].Split(",").First(),
+                    Player1 = players[i].Split(",").First(),
                     Result = players[i].Split(", ").Last(),
-                    LosingPlayer = players[i + 1]
+                    Player2 = players[i + 1]
                 });
 
             }
