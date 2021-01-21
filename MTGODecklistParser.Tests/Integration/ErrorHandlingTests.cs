@@ -38,5 +38,23 @@ namespace MTGODecklistParser.Tests.Integration
             TournamentDetailsLoader.GetTournamentDetails(new Uri("https://magic.wizards.com/en/content/pauper-league")).Decks
                 .Should().HaveCount(20);
         }
+
+        [Test]
+        public void ShouldTrimWhiteSpacesFromNames()
+        {
+            var details = TournamentDetailsLoader.GetTournamentDetails(new Uri("https://magic.wizards.com/en/articles/archive/mtgo-standings/legacy-preliminary-2020-03-13"));
+
+            details
+                .Decks
+                .First(d => d.Player.StartsWith("victor"))
+                .Player
+                .Should().Be("victor_fefe");
+
+            details
+                .Standings
+                .First(d => d.Player.StartsWith("victor"))
+                .Player
+                .Should().Be("victor_fefe");
+        }
     }
 }
